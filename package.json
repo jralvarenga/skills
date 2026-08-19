@@ -1,0 +1,10 @@
+{
+  "name": "jralvarenga-skills",
+  "module": "index.ts",
+  "type": "module",
+  "description": "Rigo Alvarenga's agent skills for software engineering",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jralvarenga/skills"
+  }
+}
