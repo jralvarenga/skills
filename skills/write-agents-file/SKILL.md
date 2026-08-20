@@ -1,15 +1,17 @@
 ---
-name: init
+name: write-agents-file
 description: Create or update AGENTS.md and CLAUDE.md, then route agents to the finished code-guidelines and design skills.
 ---
 
-This skill is meant to be used when creating a new project and adding/updating the AGENTS and CLAUDE.md files. the only purpose of this skill is to set the skills tree so the agent knows which skill to use depending on the task.
+This skill is meant to be used when creating a new project and adding/updating the AGENTS and CLAUDE.md files. the only purpose of this skill is to set the skills tree so the agent knows which skill of my own set of skills to use depending on the task.
 
 ## Writing AGENTS.md and CLAUDE.md
 
 Check if the current project already has an AGENTS.md and CLAUDE.md file, if it does, read the content and separate it into two parts, the first half needs to be the basic instructions that are below and the skill tree so the agent knows which skill to use depending on the task, the second half is the stuff that is already in the file.
 
 If there is no file, create both files and add the basic instructions, below that separated in comments add a text saying "Write project specific instructions here".
+
+AGENTS.md always needs to refer to CLAUDE.md:
 
 ### Basic instructions
 
