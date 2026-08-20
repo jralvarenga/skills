@@ -1,4 +1,0 @@
-interface:
-  display_name: "Backend"
-  short_description: "Apply personal backend develop rules"
-  default_prompt: "Use $backend to develop any feature, table, API, etc. according to my conventions."
