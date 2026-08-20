@@ -1,15 +1,18 @@
-# jralvarenga-skills
+# Skills
 
-To install dependencies:
+Personal coding skills shared between Codex, Claude Code, Cursor and any agent that supports the Agent Skills format.
 
-```bash
-bun install
-```
+The source of every skill is inside `skills/`. Don't copy the skills manually.
 
-To run:
+## Install
 
 ```bash
-bun run index.ts
+./scripts/link-skills.sh
 ```
 
-This project was created using `bun init` in bun v1.2.23. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+This links every skill to:
+
+- `~/.agents/skills` for Codex and Cursor
+- `~/.claude/skills` for Claude Code
+
+Run it again after adding, removing or renaming a skill.
