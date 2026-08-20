@@ -5,11 +5,13 @@ description: Rules on how the agent should design the frontend.
 
 This are my basic rules on how you shuold design frontend components, pages and features, take into account the requirements of the project and the user, if there are any organization rules, use them as the base but still apply these rules as long as it doesn't conflict with the organization rules. If there are any other design rules or design skills, use this current skill as the base and apply the relevant rules as long as it doesn't conflict with this rules.
 
+Always read and use the bundled [frontend-design](frontend-design/SKILL.md) skill for the visual direction and the bundled [ui-ux-pro-max](ui-ux-pro-max/SKILL.md) skill for UI, UX, accessibility and implementation rules. Use this current skill as the base if any rule conflicts.
+
 ## Design direction
 
 Have a clear vision of the product, for who it is and what the purpose of the task/feature/page is.
 Always avoid default design and generic trends unless are required by the organization, project or the user has requested it,.
-Choose one distinctive signature element or aesthetic risk and keep the rest of the interface restrained so the signature remains memorable.
+Choose one distinctive signature element or aesthetic and keep the rest of the interface restrained so the signature remains memorable.
 
 ## Colors
 

@@ -39,6 +39,8 @@ Have a clear separation for:
 Don't put any context or hooks inside /components, have a full context per file, don't segment, put createContext, Provider and export the interface of the context.
 When working on features, always have a folder per feature, only if the component/hook/model/context/etc. is for the global app put it in root folder.
 Always try to keep the file name short, take into account if a file is inside a feature folder, infer the name and name the file accordanly.
+NEVER create and use index.ts files to reexport components, hooks, models, contexts, lib, etc. always use the file name as the name of the export, unless is required by the framework.
+Naming files should be in kebab-case, functions and variables should be in camelCase.
 
 ### Writting a component
 
@@ -52,3 +54,10 @@ Follow this rules and order of the component
 - Never do export default for a component unless is required by the framework
 - Never use arrow function for a component and never write the props type inside the function
 - Empty, loading, error, etc. of that component should be in it's own file
+
+### Writting functions, hooks, lib, etc.
+
+Follow every rule as of components but with the following changes:
+
+- Always use a utils.ts file to group small functions like cn(), debounce(), throttle(), dateFormat(), etc.
+- Always add JSDocs describing what the function does. even when the function is small and simple, it's still important to describe what it does and how to use it.

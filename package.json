@@ -2,6 +2,9 @@
   "name": "jralvarenga-skills",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "update": "npx skills update frontend-design ui-ux-pro-max --project --yes && ./scripts/update-design-skills.sh"
+  },
   "description": "Rigo Alvarenga's agent skills for software engineering",
   "repository": {
     "type": "git",
