@@ -1,0 +1,25 @@
+{
+  "name": "jralvarenga-skills",
+  "version": "1.0.0",
+  "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines, frontend design, and project agent routing.",
+  "author": {
+    "name": "Rigo Alvarenga",
+    "url": "https://r1go.dev"
+  },
+  "homepage": "https://github.com/jralvarenga/skills",
+  "repository": "https://github.com/jralvarenga/skills",
+  "keywords": [
+    "engineering",
+    "skills",
+    "typescript",
+    "react",
+    "code-guidelines",
+    "design",
+    "frontend"
+  ],
+  "skills": [
+    "./skills/write-agents-file",
+    "./skills/jralv-code-guidelines",
+    "./skills/jralv-design"
+  ]
+}
