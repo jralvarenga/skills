@@ -1,5 +1,5 @@
 ---
-name: frontend-design
+name: design
 description: Rules on how the agent should design the frontend.
 ---
 
