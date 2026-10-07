@@ -1,6 +1,6 @@
 # Personal skills
 
-Read [skills/write-agents-file/SKILL.md](skills/write-agents-file/SKILL.md) first. It is the canonical skill tree and tells you which skills to use for each task.
+Read [skills/code-guidelines/SKILL.md](skills/code-guidelines/SKILL.md) for every coding task and [skills/design/SKILL.md](skills/design/SKILL.md) for any design work.
 
 Use organization and project rules as the base. Apply these personal skills when they do not conflict with higher-priority instructions or mandatory language and framework requirements.
 

@@ -76,16 +76,12 @@ This links every skill to:
 
 Run it again after adding, removing or renaming a skill.
 
-## External design skills
+## External design skill
 
-The `design` skill builds on these external skills. They are not vendored in this repository, install them alongside these skills:
+The `design` skill uses [`frontend-design`](https://github.com/anthropics/skills/tree/main/skills/frontend-design) as inspiration and a fallback when a project doesn't include it. It is not vendored in this repository, install it alongside these skills:
 
 ```bash
 npx skills add anthropics/skills --skill frontend-design --global --agent claude-code --yes
-```
-
-```bash
-npx skills add nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max --global --agent claude-code --yes
 ```
 
 ## Versioning
