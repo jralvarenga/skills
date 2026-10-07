@@ -19,7 +19,7 @@
   ],
   "skills": [
     "./skills/write-agents-file",
-    "./skills/jralv-code-guidelines",
-    "./skills/jralv-design"
+    "./skills/code-guidelines",
+    "./skills/design"
   ]
 }

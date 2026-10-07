@@ -1,5 +1,5 @@
 ---
-name: jralv-code-guidelines
+name: code-guidelines
 description: Rules on how the agent should write and format code.
 ---
 

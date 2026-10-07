@@ -31,8 +31,8 @@ init
 │   └── Writing, changing, formatting, or reviewing code
 └── design
     ├── UI and frontend design rules
-    ├── frontend-design
+    ├── frontend-design (external)
     │   └── Visual direction
-    └── ui-ux-pro-max
+    └── ui-ux-pro-max (external)
         └── UI/UX and accessibility
 ```

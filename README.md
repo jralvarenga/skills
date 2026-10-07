@@ -37,25 +37,16 @@ This links every skill to:
 
 Run it again after adding, removing or renaming a skill.
 
-## Bundled design skills
+## External design skills
 
-The `design` skill includes these external skills so they are available after cloning this repository:
-
-- [`frontend-design`](https://github.com/anthropics/skills/tree/main/skills/frontend-design) from `anthropics/skills`
-- [`ui-ux-pro-max`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.claude/skills/ui-ux-pro-max) from `nextlevelbuilder/ui-ux-pro-max-skill`
-
-## Update bundled design skills
+The `design` skill builds on these external skills. They are not vendored in this repository, install them alongside these skills:
 
 ```bash
-bun run update
+npx skills add anthropics/skills --skill frontend-design --global --agent claude-code --yes
 ```
 
-This command updates `frontend-design` and `ui-ux-pro-max` inside `.agents/skills`, then copies each complete skill into its folder inside `skills/design`.
-
-If the `.agents` copies are already current, only run the copy step:
-
 ```bash
-./scripts/update-design-skills.sh
+npx skills add nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max --global --agent claude-code --yes
 ```
 
 ## Versioning
