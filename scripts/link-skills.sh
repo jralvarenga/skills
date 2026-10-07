@@ -16,6 +16,19 @@ fi
 for target_dir in "${target_dirs[@]}"; do
   mkdir -p "$target_dir"
 
+  # Remove stale links created by this repository after skills are renamed or removed.
+  for target in "$target_dir"/*; do
+    if [ -L "$target" ] && [ ! -e "$target" ]; then
+      current_target="$(readlink "$target")"
+      case "$current_target" in
+        "$skills_dir/"*)
+          rm -- "$target"
+          echo "Removed stale link $target"
+          ;;
+      esac
+    fi
+  done
+
   while IFS= read -r skill_file; do
     skill_dir="$(dirname "$skill_file")"
     skill_name="$(basename "$skill_dir")"
