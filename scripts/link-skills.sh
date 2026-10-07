@@ -16,14 +16,16 @@ fi
 for target_dir in "${target_dirs[@]}"; do
   mkdir -p "$target_dir"
 
-  # Remove stale links created by this repository after skills are renamed or removed.
-  for target in "$target_dir"/*; do
+  # Remove stale repository links whose names match the installer's naming scheme.
+  for target in "$target_dir"/* "$target_dir"/.[!.]* "$target_dir"/..?*; do
     if [ -L "$target" ] && [ ! -e "$target" ]; then
       current_target="$(readlink "$target")"
       case "$current_target" in
         "$skills_dir/"*)
-          rm -- "$target"
-          echo "Removed stale link $target"
+          if [ "${current_target##*/}" = "${target##*/}" ]; then
+            rm -- "$target"
+            echo "Removed stale link $target"
+          fi
           ;;
       esac
     fi
