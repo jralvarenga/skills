@@ -1,0 +1,25 @@
+{
+  "name": "jralvarenga",
+  "owner": {
+    "name": "Rigo Alvarenga",
+    "url": "https://r1go.dev"
+  },
+  "description": "Rigo Alvarenga's skills for software engineering.",
+  "plugins": [
+    {
+      "name": "jralvarenga-skills",
+      "source": "./",
+      "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines and frontend design.",
+      "category": "engineering",
+      "keywords": [
+        "engineering",
+        "skills",
+        "typescript",
+        "react",
+        "code-guidelines",
+        "design",
+        "frontend"
+      ]
+    }
+  ]
+}

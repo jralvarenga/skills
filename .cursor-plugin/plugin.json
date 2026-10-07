@@ -1,5 +1,6 @@
 {
   "name": "jralvarenga-skills",
+  "displayName": "Rigo Alvarenga Skills",
   "version": "1.0.0",
   "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines and frontend design.",
   "author": {
@@ -13,6 +14,12 @@
     "skills",
     "typescript",
     "react",
+    "code-guidelines",
+    "design",
+    "frontend"
+  ],
+  "category": "developer-tools",
+  "tags": [
     "code-guidelines",
     "design",
     "frontend"
