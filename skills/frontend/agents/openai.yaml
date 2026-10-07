@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend"
+  short_description: "Apply personal frontend architecture and design rules"
+  default_prompt: "Use $frontend to design and plan the frontend application, components, pages and features according to my conventions."
