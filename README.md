@@ -1,20 +1,59 @@
 # Skills
 
-Personal coding skills shared between Codex, Claude Code, Cursor and any agent that supports the Agent Skills format.
+Personal coding skills shared between Claude Code, Codex, ChatGPT, Cursor, Grok Build and any agent that supports the Agent Skills format.
 
-This repository is distributed through [skills.sh](https://skills.sh), not npm. The package is private so Changesets can manage versions, tags and GitHub Releases without publishing it to a registry.
+This repository is distributed as an agent plugin and through [skills.sh](https://skills.sh), not npm. The package is private so Changesets can manage versions, tags and GitHub Releases without publishing it to a registry.
 
 The source of every skill is inside `skills/`. Don't copy the skills manually.
 
-## Install from skills.sh
+## Install as a plugin
 
-Install every skill globally for Claude Code:
+The repository is a plugin for every supported agent. Each agent reads its own manifest, and all of them load the same `skills/` folder:
+
+| Agent | Manifest | Marketplace |
+| --- | --- | --- |
+| Claude Code and Grok Build | `.claude-plugin/plugin.json` | `.claude-plugin/marketplace.json` |
+| Codex and ChatGPT | `.codex-plugin/plugin.json` | `.agents/plugins/marketplace.json` |
+| Cursor | `.cursor-plugin/plugin.json` | `.cursor-plugin/marketplace.json` |
+| Any [Agent Plugins](https://agent-plugins.org) client | `plugin.json` | |
+
+### Claude Code
 
 ```bash
-npx skills add jralvarenga/skills --skill '*' --global --agent claude-code --yes
+claude plugin marketplace add jralvarenga/skills
 ```
 
-Install every skill globally for Claude Code, Codex and Cursor:
+```bash
+claude plugin install jralvarenga-skills@jralvarenga
+```
+
+Or inside a session: `/plugin marketplace add jralvarenga/skills`, then `/plugin install jralvarenga-skills@jralvarenga`.
+
+### Grok Build
+
+Grok Build reads Claude Code marketplaces and plugins, so install the plugin in Claude Code first and Grok picks it up. Otherwise add `jralvarenga/skills` as a marketplace from Grok's Marketplace tab.
+
+### Codex and ChatGPT
+
+```bash
+codex plugin marketplace add jralvarenga/skills
+```
+
+```bash
+codex plugin add jralvarenga-skills@jralvarenga
+```
+
+### Cursor
+
+Add `jralvarenga/skills` as a team marketplace, then open **Customize**, find `jralvarenga-skills` and select **Install**. For a local clone, link it into Cursor's local plugins and reload the window:
+
+```bash
+ln -s "$PWD" ~/.cursor/plugins/local/jralvarenga-skills
+```
+
+## Install from skills.sh
+
+Install every skill globally without the plugin system:
 
 ```bash
 npx skills add jralvarenga/skills --skill '*' --global \
@@ -59,7 +98,7 @@ bun run changeset
 
 Choose `patch`, `minor` or `major`, write a short summary and commit the generated file inside `.changeset` with the rest of the pull request.
 
-After the pull request is merged into `main`, the release workflow creates or updates a pull request named `chore: version skills`. That pull request updates `package.json` and `CHANGELOG.md`. Once it is approved and merged, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release.
+After the pull request is merged into `main`, the release workflow creates or updates a pull request named `chore: version skills`. That pull request updates `package.json`, `CHANGELOG.md` and the version in every plugin manifest. Once it is approved and merged, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release.
 
 The commands used by the workflow are also available locally:
 

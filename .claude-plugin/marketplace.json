@@ -2,14 +2,14 @@
   "name": "jralvarenga",
   "owner": {
     "name": "Rigo Alvarenga",
-    "url": ""
+    "url": "https://r1go.dev"
   },
-  "description": "Rigo Alvarenga's skills for software engineering, installable Claude Code plugin.",
+  "description": "Rigo Alvarenga's skills for software engineering.",
   "plugins": [
     {
       "name": "jralvarenga-skills",
       "source": "./",
-      "description": "Rigo Alvarenga's agent skills for software engineering (code guidelines, frontend design, and project agent routing).",
+      "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines, frontend design, and project agent routing.",
       "category": "engineering",
       "keywords": [
         "engineering",
@@ -17,7 +17,8 @@
         "typescript",
         "react",
         "code-guidelines",
-        "design"
+        "design",
+        "frontend"
       ]
     }
   ]
