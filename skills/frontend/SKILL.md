@@ -3,15 +3,15 @@ name: frontend
 description: Rules on how the agent should design and plan the frontend application, components, pages and features.
 ---
 
-This are the basic rules on how the agent should plan and design any frontend application architecture, components, pages and features. the main goal is to create a frontend application that is easy to understand, maintain and scale. The default library/framework is React with TypeScript, using Next.js or Tanstack Start as the default framework, but you can use any other library/framework if the user requests it.
+These are the basic rules for planning and designing frontend application architecture, components, pages, and features. The main goal is to create an application that is easy to understand, maintain, and scale. Use React with TypeScript and Next.js or TanStack Start by default, unless the user or project specifies another library or framework.
 
-This is my recomended stack for frontend development, Always recomend this stack unless the user or project specifies otherwise and always ask the user if they have any other requirements or preferences:
+This is my recommended stack for frontend development. Recommend this stack unless the user or project specifies otherwise, and ask about any additional requirements or preferences:
 
 - React with TypeScript
-- Tanstack Start or Next.js
+- TanStack Start or Next.js
 - TailwindCSS or Stylex
 - Shadcn/ui with Base UI
-- Tanstack Query
+- TanStack Query
 - Zustand or Jotai
 - Sentry for error logging and monitoring
 - Biome for code linting and formatting
@@ -26,23 +26,21 @@ Before implementation, define each feature’s data flow, contracts, state owner
 
 Keep components and files focused, names concise, contracts typed, and implementation consistent with my [code-guidelines](../code-guidelines/SKILL.md). Build reusable components where responsibilities and behavior are shared, while keeping feature-specific logic within its feature. Write the implementation plan as a sequence of usable feature slices, explaining what each slice delivers, what it depends on, and how its acceptance criteria will be verified. Record consequential architectural decisions, tradeoffs, risks, and assumptions without adding unnecessary documentation or speculative infrastructure. Validate critical user journeys, business behavior, and failure recovery with appropriate checks, review screenshots throughout implementation, and verify relevant layouts, themes, and interaction states before delivery. Finish by removing unnecessary abstractions, duplicated logic, and decorative elements so the app remains coherent, maintainable, and easy to extend.
 
-### Pages and Components
-
 ### Fetching Data and State Management / API Integration
 
-Prioritize the use of tanstack query for fetching data and state management, if data can be globally used and shared, always create a context provider to manage the data and state. depending on the complexity of the app and the data that needs to be manage you can recommend and use Jotai or Zustand for the state management.
+Use TanStack Query to own cached server data and share it through query hooks and the query cache. Do not copy query data into context or a separate client store. Create a context provider only for shared client state or dependencies that need one independently. Use Zustand or Jotai when cross-feature client state warrants it.
 
-If using a SSR framework like Next.js or Tanstack Start, always use the server side rendering to fetch the data and state, and the client side rendering to render the UI. If the api is an extenal api not written not written in the same language as the frontend, ask the user if it is possible to write a wrapper api in the same language as the frontend to fetch the data and state to have full control of the data and state.
+For SSR frameworks such as Next.js or TanStack Start, choose data-fetching and rendering boundaries based on framework conventions and feature requirements. Render UI on the server where appropriate and use client components for interaction or browser APIs. Use framework loaders, server components, or server functions where supported, and hydrate the query cache when client queries need server-fetched data. If an external API uses a different language from the frontend, discuss a typed wrapper API when it would improve integration; a language difference alone does not require one.
 
 Prioritize the use of suspense and lazy loading to fetch the data and state and errorBoundary to handle the errors of the api calls and show a fallback UI if the data is not available, read [code-guidelines](../code-guidelines/SKILL.md) on how to implement this components and ui fallbacks.
 
-Every write/read action that is taken using the api, should always have a try/catch block to handle the errors and log the errors to the console, as well fully typed on what data needs to be returned from the api using zod for validation if necessary.
+Keep API inputs and responses fully typed, using Zod for runtime validation where necessary. Catch errors where recovery or translation is needed, and rethrow unexpected failures when the caller must handle them. Let TanStack Query and error boundaries propagate failures to their handlers instead of wrapping every API call in try/catch. Report unexpected failures once through the monitoring path described under Error Handling.
 
 ### UI Framework
 
 Prioritize the use of ui libraries like shadcn/ui, base ui or radix UI, tailwindcss or stylex, the use of libraries that are built on primitives is recommended, but if the user requests it, you can use any other library. Always fallback to the use of shadcn/ui and tailwindcss unless the project and the user specifies otherwise.
 
-Every ui element that is a primitive like a button, input, select, etc. should be in it's own /ui folder inside components folder, and ui fallbacks. Every other ui element that can be reused in multiple places should be either on root components or in the respective feature folder, read [code-guidelines](../code-guidelines/SKILL.md) on how to implement this components
+Keep primitive UI elements such as buttons, inputs, and selects, along with their UI fallbacks, in the components/ui folder. Place other reusable UI elements in the root components folder or the corresponding feature folder. Read [code-guidelines](../code-guidelines/SKILL.md) for implementation rules.
 
 ### Routing
 
@@ -54,7 +52,7 @@ Use React error boundaries to isolate unexpected rendering failures and display 
 
 When using TanStack Query, integrate query failures with the nearest error boundary through Suspense queries or throwOnError where appropriate. Use QueryErrorResetBoundary or useQueryErrorResetBoundary to coordinate query recovery with the boundary’s reset behavior so retrying can fetch again. Keep Suspense loading fallbacks separate from error fallbacks, and preserve usable cached data when a background refresh fails. Log unexpected failures with useful diagnostic context without exposing sensitive data or technical details in the fallback UI. Verify that errors reach the intended boundary, unaffected sections remain usable, and recovery actions restore the feature when the underlying failure is resolved
 
-If necessary always log the errors on console, use Sentry as a recomendation for error logging and monitoring, if not always log the errors on server console, never on client console, use this format always to log errors:
+Log unexpected error details once through Sentry or the project's monitoring service. When monitoring is unavailable, use the server console; forward unexpected client failures to an appropriate server reporting endpoint rather than logging them to the client console. Remove sensitive data from diagnostic context. Use the following structured format, explicitly extracting Error.name, Error.message, and Error.stack instead of passing an Error directly to JSON.stringify:
 
 ```json
 {
@@ -63,7 +61,11 @@ If necessary always log the errors on console, use Sentry as a recomendation for
   "code": "Error code",
   "timestamp": "Timestamp",
   "traceId": "Trace ID",
-  "stringifiedError": "Stringified error",
+  "error": {
+    "name": "Error",
+    "message": "Error message",
+    "stack": "Stack trace"
+  }
 }
 
 ```

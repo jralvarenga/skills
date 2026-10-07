@@ -61,7 +61,7 @@ If the component have props, always define an interface Props (never type) and n
 Never use arrow function for a component and never write the props type inside the function
 For pages or any big component/feature that is rarely used as a shared component: Empty, loading, error, etc. of that component should be in it's own file
 If a component is a ui element component like a button, card, input, etc. meaning a shared component that can be used in multiple places: loading, empty, error, item, etc. component should be in the same file as the ui element component. dont separate them into different files.
-When writting loading component, for fallback ui always prioritize the use of skeletons, for any other loading state that is user triggered use spinners or progress bars and the use of labels to describe the loading state.
+When writing a loading component, prioritize skeletons for fallback UI. For other user-triggered loading states, use labeled spinners or progress bars to describe the loading state.
 
 ### Writting functions, hooks, lib, etc.
 
