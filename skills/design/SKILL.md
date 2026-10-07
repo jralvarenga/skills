@@ -5,7 +5,7 @@ description: Rules on how the agent should design the frontend.
 
 This are my basic rules on how you shuold design frontend components, pages and features, take into account the requirements of the project and the user, if there are any organization rules, use them as the base but still apply these rules as long as it doesn't conflict with the organization rules. If there are any other design rules or design skills, use this current skill as the base and apply the relevant rules as long as it doesn't conflict with this rules.
 
-When they are installed, also read and use the external [`frontend-design`](https://github.com/anthropics/skills/tree/main/skills/frontend-design) skill for the visual direction and the external [`ui-ux-pro-max`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) skill for UI, UX, accessibility and implementation rules. Use this current skill as the base if any rule conflicts.
+frontend-design skill is huge inspiration and a base for this skill, if it's not included in the project, have it as a backup in any case you need to take a decision on design, [`frontend-design`](https://github.com/anthropics/skills/tree/main/skills/frontend-design)
 
 ## Design direction
 
@@ -15,7 +15,7 @@ Choose one distinctive signature element or aesthetic and keep the rest of the i
 
 ## Colors
 
-Check theme source code and make sure this tokens are defined at leaast:
+Check theme source code and make sure this tokens are defined:
 
 - background
 - foreground

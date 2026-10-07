@@ -36,6 +36,15 @@ Have a clear separation for:
 - lib
 - etc...
 
+For features that require a lot of components, hooks, models, contexts, lib, etc. create a folder for that feature and put all the files the respective folder, for example:
+
+- /components/new-feature/**.tsx
+- /hooks/new-feature/**.ts
+- /models/new-feature/**.ts
+- /contexts/new-feature/**.ts
+- /lib/new-feature/**.ts
+- /etc...
+
 Don't put any context or hooks inside /components, have a full context per file, don't segment, put createContext, Provider and export the interface of the context.
 When working on features, always have a folder per feature, only if the component/hook/model/context/etc. is for the global app put it in root folder.
 Always try to keep the file name short, take into account if a file is inside a feature folder, infer the name and name the file accordanly.
@@ -46,18 +55,16 @@ Naming files should be in kebab-case, functions and variables should be in camel
 
 Follow this rules and order of the component
 
-- Only 1 component per file
-- The name of the component should be the same name of the file.
-- Imports from packages should be first, imports from the same app comes nexts
-- Types should go next, always before a type
-- If the component have props, always define an interface Props (never type)
-- Never do export default for a component unless is required by the framework
-- Never use arrow function for a component and never write the props type inside the function
-- Empty, loading, error, etc. of that component should be in it's own file
+Only 1 component per file and the name of the component should be the same name of the file
+Imports from packages should be first, imports from the same app comes nexts and then Interfaces and Types should go next
+If the component have props, always define an interface Props (never type) and never do export default for a component unless is required by the framework
+Never use arrow function for a component and never write the props type inside the function
+For pages or any big component/feature that is rarely used as a shared component: Empty, loading, error, etc. of that component should be in it's own file
+If a component is a ui element component like a button, card, input, etc. meaning a shared component that can be used in multiple places: loading, empty, error, item, etc. component should be in the same file as the ui element component. dont separate them into different files.
 
 ### Writting functions, hooks, lib, etc.
 
 Follow every rule as of components but with the following changes:
 
-- Always use a utils.ts file to group small functions like cn(), debounce(), throttle(), dateFormat(), etc.
-- Always add JSDocs describing what the function does. even when the function is small and simple, it's still important to describe what it does and how to use it.
+Always use a utils.ts file to group small functions like cn(), debounce(), throttle(), dateFormat(), etc. everything else should be in the respective file, again follow the rule of [files and directories](../code-guidelines/SKILL.md#files-and-directories)
+Always add JSDocs describing what the function does. even when the function is small and simple, it's still important to describe what it does and how to use it as well always include a Type for the params and a Type for the return value.
