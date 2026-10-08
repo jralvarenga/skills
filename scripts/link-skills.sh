@@ -16,6 +16,21 @@ fi
 for target_dir in "${target_dirs[@]}"; do
   mkdir -p "$target_dir"
 
+  # Remove stale repository links whose names match the installer's naming scheme.
+  for target in "$target_dir"/* "$target_dir"/.[!.]* "$target_dir"/..?*; do
+    if [ -L "$target" ] && [ ! -e "$target" ]; then
+      current_target="$(readlink "$target")"
+      case "$current_target" in
+        "$skills_dir/"*)
+          if [ "${current_target##*/}" = "${target##*/}" ]; then
+            rm -- "$target"
+            echo "Removed stale link $target"
+          fi
+          ;;
+      esac
+    fi
+  done
+
   while IFS= read -r skill_file; do
     skill_dir="$(dirname "$skill_file")"
     skill_name="$(basename "$skill_dir")"

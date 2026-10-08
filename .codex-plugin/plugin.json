@@ -19,7 +19,9 @@
     "frontend"
   ],
   "skills": "./skills/",
-  "displayName": "Rigo Alvarenga Skills",
-  "shortDescription": "Personal code guidelines and frontend design rules",
-  "category": "Coding"
+  "interface": {
+    "displayName": "Rigo Alvarenga Skills",
+    "shortDescription": "Personal code guidelines and frontend design rules",
+    "category": "Coding"
+  }
 }
