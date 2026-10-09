@@ -129,7 +129,7 @@ Build the payload in a file, then post it as one review:
   "body": "<summary comment markdown>",
   "comments": [
     { "path": "src/a.ts", "line": 42, "side": "RIGHT", "body": "<inline comment>" },
-    { "path": "src/b.ts", "start_line": 10, "line": 14, "side": "RIGHT", "body": "<multi-line comment>" }
+    { "path": "src/b.ts", "start_line": 10, "start_side": "RIGHT", "line": 14, "side": "RIGHT", "body": "<multi-line comment>" }
   ]
 }
 ```
