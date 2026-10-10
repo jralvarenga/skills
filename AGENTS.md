@@ -1,6 +1,6 @@
 # Personal skills
 
-Read [skills/code-guidelines/SKILL.md](skills/code-guidelines/SKILL.md) for every coding task and [skills/design/SKILL.md](skills/design/SKILL.md) for any design work. Use [skills/agent-file/SKILL.md](skills/agent-file/SKILL.md) when creating or updating AGENTS.md, CLAUDE.md, or DESIGN.md. Use [skills/issue-management/SKILL.md](skills/issue-management/SKILL.md) when creating, refining, assigning, or triaging issues.
+Read [skills/code-guidelines/SKILL.md](skills/code-guidelines/SKILL.md) for every coding task and [skills/design/SKILL.md](skills/design/SKILL.md) for any design work. Use [skills/agent-file/SKILL.md](skills/agent-file/SKILL.md) when creating or updating AGENTS.md, CLAUDE.md, or DESIGN.md. Use [skills/issue-management/SKILL.md](skills/issue-management/SKILL.md) when managing issues, including creating, refining, renaming, splitting, assigning, handing off, commenting on, or triaging them.
 
 Use organization and project rules as the base. Apply these personal skills when they do not conflict with higher-priority instructions or mandatory language and framework requirements.
 
