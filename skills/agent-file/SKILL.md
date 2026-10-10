@@ -3,7 +3,7 @@ name: agent-file
 description: Rules on how the agent should create and update a project's agent files, AGENTS.md, CLAUDE.md and DESIGN.md, by reading the codebase. Use when setting up a new project, when asked to write or refresh AGENTS.md, CLAUDE.md or DESIGN.md, or after a change to the architecture, commands, or design system that makes them stale.
 ---
 
-This are my rules on how to write the agent files of a project. The goal is that any agent opening the project understands what the app is, how it is built, how to work in it, and how it should look, without rediscovering it from the code every time. Use organization and project rules as the base and apply these rules as long as they do not conflict with them.
+These are my rules on how to write the agent files of a project. The goal is that any agent opening the project understands what the app is, how it is built, how to work in it, and how it should look, without rediscovering it from the code every time. Use organization and project rules as the base and apply these rules as long as they do not conflict with them.
 
 ## Files
 
@@ -65,9 +65,9 @@ Read DESIGN.md before any UI work.
 
 - Architecture explains how the pieces connect and where data flows, not a list of every file.
 - Project structure only lists the top level folders and what belongs in each one.
-- Commands are exact and copy pasteable, include install, dev, build, format, check, test, and database tasks. Run them when possible to confirm they work.
+- Commands are exact and copy pasteable; include install, dev, build, format, check, test, and database tasks when the project supports them. Run them when possible to confirm they work. Omit categories the project does not have.
 - Environment lists the variable names and what they are for, never values or secrets.
-- Conventions only include what is specific to this project, link to the skills instead of repeating them, for example [code-guidelines](../code-guidelines/SKILL.md), [frontend](../frontend/SKILL.md), and [app-architecture](../app-architecture/SKILL.md).
+- Conventions only include what is specific to this project. Link to skills by name instead of repeating them, for example code-guidelines, frontend, and app-architecture. Only add a file path when that path resolves from the generated `AGENTS.md` at the project root.
 - Rules are the things the agent must always or never do in this project, for example never edit generated files or always run the check command before finishing.
 
 ## Writing DESIGN.md
@@ -89,7 +89,7 @@ Follow [design](../design/SKILL.md) and use this order:
 ## Open questions
 ```
 
-- Always read first ui tokens: colors, fonts, spacing, and layout. Then component primitives like buttons, inputs, cards, etc. and their variants.
+- Always read UI tokens first: colors, fonts, spacing, and layout. Then component primitives like buttons, inputs, cards, etc. and their variants.
 - Direction describes the product personality, the audience, and the feeling the interface should give.
 - Signature names the one distinctive element of the product and where it is used.
 - Colors list every semantic token with its light and dark value and its purpose, and where the tokens are defined.
