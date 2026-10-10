@@ -1,6 +1,6 @@
 ---
 name: issue-management
-description: Rules on how the agent should create and manage issues in Linear, GitHub or any other issue tracker, including routing, defaults, priority, the issue body, batches of related issues, and updates like reassigning, comments, sub-issues, and moving to In Review. Use when asked to create, refine, rename, split, assign, hand off, comment on, or triage issues.
+description: Rules on how the agent should create and manage issues in Linear, GitHub, or any other issue tracker, including routing, defaults, priority, the issue body, batches of related issues, and updates like reassigning, comments, sub-issues, and moving to In Review. Use when asked to create, refine, rename, split, assign, hand off, comment on, or triage issues.
 ---
 
 These are my rules on how to file and manage issues. The goal is that every issue looks the same, lands in the right place, and is clear enough to implement without asking me again. Use organization and project rules as the base and apply these rules as long as they do not conflict with them.
@@ -28,7 +28,7 @@ Apply these without asking unless I say otherwise:
 
 - **Assignee:** me, the current user of the integration.
 - **State:** Todo, or the tracker's equivalent of ready to start. Open when the tracker has no states.
-- **Label:** an existing type label like Feature, or Bug for regressions and breakage. Skip labels the tracker doesn't have.
+- **Label:** an existing type label like Feature, Improvement, or Bug for regressions and breakage. Skip labels the tracker doesn't have.
 - **Priority:** following the priority guide, when the tracker supports it.
 - **Due date:** only when I give a deadline.
 
@@ -49,7 +49,7 @@ Write titles, bodies, comments, and the report in English, even when I ask in an
 
 ## Title
 
-- Short, specific, and describes the outcome.
+- Short, specific, and imperative. Describe the outcome.
 - Prefix with the platform when the issue is scoped to one, for example `iOS: ...`.
 - Add the design reference in parentheses when I name one, for example `iOS: date picker (Horizon Calendar style)`.
 - Regressions say what is broken and the fix, for example `iOS: tab bar regressing to one full row (restore separated tabs)`.
@@ -100,7 +100,7 @@ When I list two or more things, split them into one issue per independently deli
 - **In Review:** when a PR is up, move the issue to In Review, or the tracker's equivalent, and link the PR. Reference the issue from the PR with a closing keyword when the tracker supports it.
 - **Comments:** use a comment for updates, decisions, and findings that come after creation. Change the body only when the scope or target changes.
 - **Sub-issues:** use them to break down a large issue. Each sub-issue follows the same title and body rules and links back to the parent. When the tracker has no sub-issues, use a checklist of linked issues in the parent.
-- **Triage:** for duplicates, keep the oldest or most complete issue, link the other to it, and close or cancel the duplicate. Fix wrong routing, labels, or priority following these rules.
+- **Triage:** for duplicates, keep the most complete issue, or the oldest when they match. Link the other to it, and close or cancel the duplicate. Fix wrong routing, labels, or priority following these rules.
 
 ## Report back
 
@@ -110,4 +110,4 @@ After creating or updating, confirm the fields from the tool response, and fetch
 - Project, assignee, state, and priority.
 - One sentence on what it covers.
 
-For batches, one line per issue. Mention any non-default value and why, and any open question left in the body. Don't imply the work has started, creating an issue is not implementing it.
+For batches, one line per issue. Mention any non-default value and why, and any open question left in the body. Don't imply the work has started; creating an issue is not implementing it.

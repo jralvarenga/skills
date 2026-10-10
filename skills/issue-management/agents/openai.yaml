@@ -1,4 +1,4 @@
 interface:
   display_name: "Issue Management"
-  short_description: "File and manage issues in Linear, GitHub or any other issue tracker with personal conventions"
+  short_description: "File and manage issues in Linear, GitHub, or any other issue tracker with personal conventions"
   default_prompt: "Use $issue-management to create or update these issues according to my conventions."
