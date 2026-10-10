@@ -1,5 +1,11 @@
 # jralvarenga-skills
 
+## 2.3.0
+
+### Minor Changes
+
+- f86beb1: Add the `app-architecture` skill for repository structure, branching and protection, environments, deployment, and authentication.
+
 ## 2.2.0
 
 ### Minor Changes
