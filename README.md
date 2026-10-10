@@ -84,6 +84,12 @@ The `design` skill uses [`frontend-design`](https://github.com/anthropics/skills
 npx skills add anthropics/skills --skill frontend-design --global --agent claude-code --yes
 ```
 
+## Contributing
+
+- Feature pull requests target `next`.
+- The Changesets version pull request (`chore: version skills`) also targets `next`.
+- Open a pull request from `next` into `main` when you want to release. The `Enforce main source` check rejects pull requests into `main` from any other branch.
+
 ## Versioning
 
 Add a changeset to every pull request that should create a new release:
@@ -94,7 +100,7 @@ bun run changeset
 
 Choose `patch`, `minor` or `major`, write a short summary and commit the generated file inside `.changeset` with the rest of the pull request.
 
-After the pull request is merged into `main`, the release workflow creates or updates a pull request named `chore: version skills`. That pull request updates `package.json`, `CHANGELOG.md` and the version in every plugin manifest. Once it is approved and merged, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release.
+After the pull request is merged into `next`, the release workflow creates or updates a pull request named `chore: version skills` against `next`. That pull request updates `package.json`, `CHANGELOG.md` and the version in every plugin manifest. Once it is approved and merged into `next`, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release. Merge `next` into `main` to publish that release on `main`.
 
 The commands used by the workflow are also available locally:
 
@@ -107,9 +113,10 @@ bun run release
 
 ## GitHub setup
 
-Protect the `main` branch with these settings:
+Protect the `main` and `next` branches with these settings:
 
 - Require pull requests with one approval.
+- On `main`, require the `main-only-from-next` status check so only `next` can be merged into it.
 - Dismiss stale approvals and require resolved conversations.
 - Allow repository administrators to bypass approval requirements.
 - Block force pushes and branch deletion.
