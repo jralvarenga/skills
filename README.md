@@ -88,7 +88,7 @@ npx skills add anthropics/skills --skill frontend-design --global --agent claude
 
 - Feature pull requests target `next`.
 - The Changesets version pull request (`chore: version skills`) also targets `next`.
-- Merge `next` into `main` when you want to release.
+- Open a pull request from `next` into `main` when you want to release. The `Enforce main source` check rejects pull requests into `main` from any other branch.
 
 ## Versioning
 
@@ -113,9 +113,10 @@ bun run release
 
 ## GitHub setup
 
-Protect the `main` branch with these settings:
+Protect the `main` and `next` branches with these settings:
 
 - Require pull requests with one approval.
+- On `main`, require the `main-only-from-next` status check so only `next` can be merged into it.
 - Dismiss stale approvals and require resolved conversations.
 - Allow repository administrators to bypass approval requirements.
 - Block force pushes and branch deletion.
