@@ -1,5 +1,11 @@
 # jralvarenga-skills
 
+## 2.2.0
+
+### Minor Changes
+
+- e05d49e: Add the `code-review` skill for reviewing pull requests against project rules and the code guidelines, with severity-ranked summary and inline comments.
+
 ## 2.1.0
 
 ### Minor Changes
