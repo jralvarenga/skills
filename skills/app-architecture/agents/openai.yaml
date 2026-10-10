@@ -1,0 +1,4 @@
+interface:
+  display_name: "App Architecture"
+  short_description: "Apply personal app setup, branching and deployment rules"
+  default_prompt: "Use $app-architecture to set up or restructure this application according to my conventions."
