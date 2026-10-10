@@ -34,5 +34,6 @@ jobs:
           commit: "chore: version skills"
           title: "chore: version skills"
           createGithubReleases: true
+          branch: next
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
