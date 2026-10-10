@@ -1,7 +1,9 @@
 name: Enforce main source
 
+# pull_request_target runs main's copy of this file, so a PR cannot edit the
+# check to pass. Only read PR metadata here; never check out PR code.
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened, edited]
     branches: [main]
 
