@@ -1,7 +1,10 @@
 name: Enforce main source
 
-# pull_request_target runs main's copy of this file, so a PR cannot edit the
-# check to pass. Only read PR metadata here; never check out PR code.
+# pull_request_target runs the workflow from the default branch (main), so
+# `branches: [main]` does not reliably exclude PRs whose base is next.
+# The job always runs and succeeds unless the PR actually targets main
+# from a head other than this repository's next branch.
+# Only read PR metadata here; never check out PR code.
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, edited]
@@ -17,9 +20,15 @@ jobs:
         env:
           EXPECTED_REF: next
           EXPECTED_REPO: ${{ github.repository }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
           HEAD_REF: ${{ github.head_ref }}
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
+          if [ "$BASE_REF" != "main" ]; then
+            echo "PR base is '${BASE_REF}', not main. Check passes."
+            exit 0
+          fi
+
           if [ "$HEAD_REF" != "$EXPECTED_REF" ] || [ "$HEAD_REPO" != "$EXPECTED_REPO" ]; then
             echo "::error::Pull requests into main must come from the next branch on this repository."
             echo "Expected head: ${EXPECTED_REPO}:${EXPECTED_REF}"

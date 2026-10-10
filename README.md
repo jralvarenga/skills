@@ -100,7 +100,7 @@ bun run changeset
 
 Choose `patch`, `minor` or `major`, write a short summary and commit the generated file inside `.changeset` with the rest of the pull request.
 
-After the pull request is merged into `next`, the release workflow creates or updates a pull request named `chore: version skills` against `next`. That pull request updates `package.json`, `CHANGELOG.md` and the version in every plugin manifest. Once it is approved and merged into `next`, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release. Merge `next` into `main` to publish that release on `main`.
+After the pull request is merged into `next`, the release workflow creates or updates a pull request named `chore: version skills` against `next`. That pull request updates `package.json`, `CHANGELOG.md` and the version in every plugin manifest. Once it is approved and merged into `next`, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release. Merge `next` into `main` to update the default branch with the released changes; this does not publish another release.
 
 The commands used by the workflow are also available locally:
 
