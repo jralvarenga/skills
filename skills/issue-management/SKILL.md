@@ -18,7 +18,7 @@ Use the connected integration for the tracker to create and update issues. Never
 
 ## Before creating
 
-- Search the target team, project, or repository for an existing issue that covers the same work. If one exists, update it instead of opening a duplicate, and tell me which one you used.
+- Search the target team, project, or repository for an existing issue that covers the same work. If an open one exists, update it instead of opening a duplicate, and tell me which one you used. If the only match is resolved or canceled, mention it in Related and open a new issue unless I say to reopen it.
 - Look up the real teams, projects, milestones, labels, states, and users. Never invent labels, milestones, cycles, estimates, or due dates to fill fields.
 - If code or context is available and relevant, read it before writing the body. Never imply code was inspected when it wasn't.
 
@@ -60,6 +60,8 @@ Write titles, bodies, comments, and the report in English, even when I ask in an
 Start with one bold line stating the scope, for example **iOS app only**. Then use these sections, deleting any that don't apply:
 
 ```md
+**iOS app only**
+
 ## Problem
 
 What is wrong or missing today and why it matters. For bugs, the observed behavior, the expected behavior, and reproduction steps when known.
@@ -107,7 +109,7 @@ When I list two or more things, split them into one issue per independently deli
 After creating or updating, confirm the fields from the tool response, and fetch the issue if the response is incomplete. Then reply with one short message:
 
 - A link per issue using its identifier, for example `[ENG-99](url)` or `[repo#21](url)`, with the title.
-- Project, assignee, state, and priority.
+- Project, assignee, state, and priority when the tracker has them. Say when a field is unavailable.
 - One sentence on what it covers.
 
 For batches, one line per issue. Mention any non-default value and why, and any open question left in the body. Don't imply the work has started; creating an issue is not implementing it.
