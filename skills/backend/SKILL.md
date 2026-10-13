@@ -3,13 +3,13 @@ name: backend
 description: Rules on how the agent should design and plan the backend, including APIs, databases, validation, and infrastructure. Use when creating or changing an API, a database schema or query, a server, a background job, or the Docker and deployment setup of a service.
 ---
 
-These are the basic rules for planning and designing backend architecture, APIs, databases, and infrastructure. The main goal is to create a backend that is predictable, typed from end to end, easy to run anywhere, and safe to change. Use TypeScript with oRPC or Hono, Postgres with Drizzle, and Zod by default, unless the user or project specifies another language, framework, or library. Use organization and project rules as the base and apply these rules as long as they do not conflict with them.
+These are the basic rules for planning and designing backend architecture, APIs, databases, and infrastructure. The main goal is to create a backend that is predictable, typed from end to end, easy to run anywhere, and safe to change. Use TypeScript with oRPC or Hono, Postgres with Drizzle, and Zod 4 by default, unless the user or project specifies another language, framework, or library. Use organization and project rules as the base and apply these rules as long as they do not conflict with them.
 
 This is my recommended stack for backend development. Recommend this stack unless the user or project specifies otherwise, and ask about any additional requirements or preferences:
 
 - TypeScript running on Bun or Node.js
 - oRPC for APIs consumed by my own apps, Hono for standalone HTTP services and public REST APIs
-- Zod for every validation schema
+- Zod 4 for every validation schema
 - Postgres with Drizzle ORM and drizzle-kit for migrations
 - Convex when the product needs real-time data synchronization
 - better-auth or WorkOS for authentication
@@ -53,11 +53,11 @@ src/
   server.ts
 ```
 
-Keep dependencies flowing in one direction, routers to services to db, and never import a router from a service or a service from the db layer. Introduce queues, caches, background jobs, or extra services only when a concrete requirement justifies them. Write the implementation plan as a sequence of usable slices, each one including its schema, migration, service, procedure, and tests, and explain how its acceptance criteria will be verified. Record consequential decisions, tradeoffs, and risks without adding speculative infrastructure.
+Keep dependencies flowing in one direction, routers to services to db. Never import a router from a service, and never import a service from the db layer. Introduce queues, caches, background jobs, or extra services only when a concrete requirement justifies them. Write the implementation plan as a sequence of usable slices, each one including its schema, migration, service, procedure, and tests, and explain how its acceptance criteria will be verified. Record consequential decisions, tradeoffs, and risks without adding speculative infrastructure.
 
 ## Validation and Types
 
-Always use Zod for validation. Define the validation schema first and infer the TypeScript type from it with `z.infer`, `z.input`, or `z.output`. Never write a type or interface by hand that duplicates the shape of a schema, because the two will drift apart. Write a standalone type only when the data never crosses a boundary and has nothing to validate, and prefer `type` over `interface` as described in the code guidelines.
+Always use Zod 4 for validation. Define the validation schema first and infer the TypeScript type from it. Use `z.infer` or `z.output` for parsed values, and `z.input` when the accepted shape differs because of defaults, transforms, or preprocess. Those inferred types satisfy the code-guidelines requirement to type parameters and return values; never write a type or interface by hand that duplicates the shape of a schema, because the two will drift apart. Write a standalone type only when the data never crosses a boundary and has nothing to validate, and prefer `type` over `interface` as described in the code guidelines.
 
 Every request and every response must be typed through a schema or a type inferred from one. This includes request bodies, route and query parameters, headers the server relies on, responses, error payloads, webhooks, queue messages, cron job payloads, and the responses of external APIs. Validate everything that enters the system at the boundary where it enters, and trust the inferred type after that point. Validate responses from external APIs instead of casting them, and never use `any` or `as` to silence a type that should come from a schema.
 
@@ -72,7 +72,7 @@ export const createOrderInput = z.object({
 export const order = z.object({
   id: z.uuid(),
   status: z.enum(["pending", "paid", "cancelled"]),
-  total: z.number().nonnegative(),
+  totalCents: z.int().nonnegative(),
   createdAt: z.iso.datetime(),
 })
 
@@ -80,15 +80,15 @@ export type CreateOrderInput = z.infer<typeof createOrderInput>
 export type Order = z.infer<typeof order>
 ```
 
-Response schemas describe what travels over the wire, not the server's in-memory values. JSON has no date type, so model dates in responses as ISO strings with `z.iso.datetime()` and convert them before returning, unless the transport preserves `Date` values, as oRPC's own RPC serializer does. Apply the same rule to `bigint`, `Map`, `Set`, and other values JSON cannot represent.
+Response schemas describe what travels over the wire, not the server's in-memory values. JSON has no date type, so model dates in JSON responses as ISO strings with `z.iso.datetime()` and convert them with `Date.toISOString()` before returning, unless the transport preserves `Date` values, as oRPC's own RPC serializer does. `z.iso.datetime()` accepts UTC instants ending in `Z` by default; pass `{ offset: true }` only when the API must accept offset timestamps. Apply the same JSON-vs-native rule to `bigint`, `Map`, `Set`, and other values JSON cannot represent.
 
-Keep schemas in the models layer of their feature and share them with the clients through the API contract or a shared package, so the frontend validates forms with the same schemas the backend uses. Compose schemas with `pick`, `omit`, `extend`, and `partial` instead of redefining fields. Validate environment variables with a Zod schema in a single env file at startup and fail fast when a required value is missing or invalid. Keep validation messages translatable as described in the frontend internationalization rules.
+Keep schemas in the models layer of their feature and share them with the clients through the API contract or a shared package, so the frontend validates forms with the same schemas the backend uses. Compose schemas with `pick`, `omit`, `extend`, and `partial` instead of redefining fields. Validate environment variables with a Zod schema in a single env file at startup and fail fast when a required value is missing or invalid. Commit an `.env.example` with variable names only, never real values, and never log secrets. Keep validation messages translatable as described in the frontend internationalization rules.
 
 ## Database
 
-Use Postgres with Drizzle as the default database and ORM. Define the database schema with Drizzle and generate the Zod schemas from it with drizzle-zod, using `createSelectSchema`, `createInsertSchema`, and `createUpdateSchema`, or the Zod integration built into Drizzle when the project's version includes it. Refine the generated schemas in the models layer with the business rules the database cannot express, and infer the types from those schemas instead of using Drizzle's `$inferSelect` and `$inferInsert` directly in services. Validate the data before it reaches a query; the database constraints are the last line of defense, not the validation layer.
+Use Postgres with Drizzle as the default database and ORM. Define the database schema with Drizzle and generate the Zod schemas from it with `createSelectSchema`, `createInsertSchema`, and `createUpdateSchema`. Import those helpers from `drizzle-zod` on Drizzle 0.x, or from `drizzle-orm/zod` when the project is on Drizzle 1. Refine the generated schemas in the models layer with the business rules the database cannot express, and use the inferred model types at the API and service boundary. Keep Drizzle's `$inferSelect` and `$inferInsert` inside the db layer for query results whose shape does not match a full-row schema, such as partial selects. Validate the data before it reaches a query; the database constraints are the last line of defense, not the validation layer.
 
-Design tables around the domain and its access patterns. Use plural snake_case table names and snake_case columns mapped to camelCase in TypeScript through Drizzle's casing option. Give every table a primary key, `created_at` and `updated_at` timestamps stored with time zone, explicit foreign keys with a deliberate delete behavior, and `not null` by default. Add unique constraints for business uniqueness, check constraints for simple invariants, and indexes for the columns used to filter, join, and sort. Store money as integers in the smallest currency unit or as `numeric`, never as floating point. Use soft deletes only when the product needs to restore or audit deleted records.
+Design tables around the domain and its access patterns. Use plural snake_case table names and snake_case columns mapped to camelCase in TypeScript. Set `casing: 'snake_case'` on both the Drizzle client and the drizzle-kit config so queries and migrations agree. Give every table a primary key, `created_at` and `updated_at` timestamps stored with time zone, explicit foreign keys with a deliberate delete behavior, and `not null` by default. Add unique constraints for business uniqueness, check constraints for simple invariants, and indexes for the columns used to filter, join, and sort. Store money as integers in the smallest currency unit or as `numeric`, never as floating point. Use soft deletes only when the product needs to restore or audit deleted records.
 
 Keep queries in the db layer of their feature and expose them as named functions with typed inputs and outputs. Select only the columns the caller needs, avoid N+1 queries by using joins or Drizzle's relational queries, and use cursor-based pagination for lists that can grow. Wrap operations that must succeed or fail together in a transaction, and keep external calls outside of transactions. Use parameterized queries only and never build SQL by concatenating strings.
 
@@ -98,17 +98,17 @@ When the project uses Convex, define tables and function arguments with Convex v
 
 ## API
 
-Use oRPC for APIs consumed by my own apps and Hono for standalone services or public REST APIs, unless the user or project specifies otherwise. Prefer contract-first design: define the contract with its input, output, and error schemas, implement it on the server, and give clients a typed client generated from that same contract. Every oRPC procedure must declare `.input()` and `.output()` with Zod schemas, and every Hono route must validate its body, parameters, and query with `@hono/zod-validator` and type its response with a schema. Expose an OpenAPI document generated from the schemas for any API consumed outside the repository.
+Use oRPC for APIs consumed by my own apps and Hono for standalone services or public REST APIs, unless the user or project specifies otherwise. Prefer contract-first design: define the contract with its input, output, and error schemas, implement it on the server, and give clients a typed client generated from that same contract. Every oRPC procedure must declare `.output()` with a Zod schema, and every procedure that accepts arguments must declare `.input()`; procedures that take no arguments omit `.input()`. Every Hono route must validate its body, parameters, query, and any headers the server relies on with `@hono/zod-validator`. `@hono/zod-validator` does not type responses: parse the handler result with the output schema before returning it, and use `@hono/zod-openapi` when the Hono API needs an OpenAPI document. Expose an OpenAPI document generated from the schemas for any API consumed outside the repository.
 
 Design endpoints around resources and user actions, with consistent naming, plural resource names, and predictable status codes. Use GET for reads without side effects, POST to create or trigger actions, PATCH for partial updates, and DELETE for removals. Return lists with a consistent pagination shape that includes the items and the next cursor. Accept idempotency keys for operations that create payments, orders, or other records that must not be duplicated on retry. Version public APIs and never ship a breaking change to an existing version.
 
-Authenticate requests in middleware and authorize every operation on the server, checking ownership or permissions in the service before reading or changing data. Never trust identifiers, roles, or prices sent by the client. Add rate limiting to authentication and other abuse-prone endpoints, configure CORS with an explicit list of origins, set request body size limits, and apply timeouts and bounded retries with backoff to every external call.
+Authenticate requests in middleware with better-auth or WorkOS and authorize every operation on the server, checking ownership or permissions in the service before reading or changing data. Never trust identifiers, roles, or prices sent by the client. Verify webhook signatures before parsing the payload. Never log tokens, cookies, passwords, or secret environment values. Add rate limiting to authentication and other abuse-prone endpoints, configure CORS with an explicit list of origins, set request body size limits, and apply timeouts and bounded retries with backoff to every external call.
 
 ## Error Handling
 
 Define expected errors as part of the contract, using oRPC's typed errors or a shared error schema for Hono, so clients can handle them without parsing messages. Return the same error shape from every endpoint with a stable code, a safe message, and a trace ID, and never expose stack traces, SQL, or internal identifiers to clients. Throw expected errors from services and let a single error handler translate them into responses. Catch errors only where recovery or translation is needed and let unexpected failures reach that handler.
 
-Log unexpected errors once, at the handler, through Sentry or the project's monitoring service, and fall back to structured logs on the server console when monitoring is unavailable. Use the structured format described in the [frontend error handling](../frontend/SKILL.md#error-handling) rules, extract `Error.name`, `Error.message`, and `Error.stack` explicitly, propagate the trace ID across services, and remove secrets and personal data from the diagnostic context. Validation failures are expected errors: return them with the field-level issues from Zod and do not report them to monitoring.
+Log unexpected errors once, at the handler, through Sentry or the project's monitoring service, and fall back to structured logs on the server console when monitoring is unavailable. Use the structured format described in the [frontend error handling](../frontend/SKILL.md#error-handling) rules, extract `Error.name`, `Error.message`, and `Error.stack` explicitly, propagate the trace ID across services, and remove secrets and personal data from the diagnostic context. Log each request with method, path, status, duration, and trace ID, and omit bodies, tokens, and personal data. Validation failures are expected errors: return them with the field-level issues from Zod and do not report them to monitoring.
 
 ## Infrastructure
 

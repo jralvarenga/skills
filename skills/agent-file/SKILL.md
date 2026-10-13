@@ -67,7 +67,7 @@ Read DESIGN.md before any UI work.
 - Project structure only lists the top level folders and what belongs in each one.
 - Commands are exact and copy pasteable; include install, dev, build, format, check, test, and database tasks when the project supports them. Run them when possible to confirm they work. Omit categories the project does not have.
 - Environment lists the variable names and what they are for, never values or secrets.
-- Conventions only include what is specific to this project. Link to skills by name instead of repeating them, for example code-guidelines, frontend, and app-architecture. Only add a file path when that path resolves from the generated `AGENTS.md` at the project root.
+- Conventions only include what is specific to this project. Link to skills by name instead of repeating them, for example code-guidelines, frontend, backend, and app-architecture. Only add a file path when that path resolves from the generated `AGENTS.md` at the project root.
 - Rules are the things the agent must always or never do in this project, for example never edit generated files or always run the check command before finishing.
 
 ## Writing DESIGN.md
