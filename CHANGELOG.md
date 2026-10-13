@@ -1,5 +1,12 @@
 # jralvarenga-skills
 
+## 2.4.0
+
+### Minor Changes
+
+- 2939673: Add an issue-management skill for filing and managing issues in any tracker with consistent routing, defaults, priority, and body format
+- 8c20185: Add an agent-file skill for reading a codebase and creating or refreshing AGENTS.md, CLAUDE.md, and DESIGN.md
+
 ## 2.3.0
 
 ### Minor Changes
