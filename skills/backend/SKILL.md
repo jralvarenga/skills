@@ -73,12 +73,14 @@ export const order = z.object({
   id: z.uuid(),
   status: z.enum(["pending", "paid", "cancelled"]),
   total: z.number().nonnegative(),
-  createdAt: z.date(),
+  createdAt: z.iso.datetime(),
 })
 
 export type CreateOrderInput = z.infer<typeof createOrderInput>
 export type Order = z.infer<typeof order>
 ```
+
+Response schemas describe what travels over the wire, not the server's in-memory values. JSON has no date type, so model dates in responses as ISO strings with `z.iso.datetime()` and convert them before returning, unless the transport preserves `Date` values, as oRPC's own RPC serializer does. Apply the same rule to `bigint`, `Map`, `Set`, and other values JSON cannot represent.
 
 Keep schemas in the models layer of their feature and share them with the clients through the API contract or a shared package, so the frontend validates forms with the same schemas the backend uses. Compose schemas with `pick`, `omit`, `extend`, and `partial` instead of redefining fields. Validate environment variables with a Zod schema in a single env file at startup and fail fast when a required value is missing or invalid. Keep validation messages translatable as described in the frontend internationalization rules.
 
