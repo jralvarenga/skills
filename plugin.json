@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "jralvarenga-skills",
   "version": "2.4.0",
-  "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines, frontend design, code review and app architecture.",
+  "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines, frontend design, code review, app architecture and backend.",
   "author": {
     "name": "Rigo Alvarenga",
     "url": "https://r1go.dev"
@@ -17,6 +17,7 @@
     "code-guidelines",
     "design",
     "frontend",
-    "code-review"
+    "code-review",
+    "backend"
   ]
 }

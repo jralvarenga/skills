@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend"
+  short_description: "Apply personal backend, database, API and infrastructure rules"
+  default_prompt: "Use $backend to design and plan the backend, APIs, database and infrastructure according to my conventions."
