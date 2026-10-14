@@ -1,6 +1,6 @@
-# Skills
+# Rigo's Skills
 
-Personal coding skills shared between Claude Code, Codex, ChatGPT, Cursor, Grok Build and any agent that supports the Agent Skills format.
+Rigo's Skills is a personal collection of coding skills shared between Claude Code, Codex, ChatGPT, Cursor, Grok Build and any agent that supports the Agent Skills format.
 
 This repository is distributed as an agent plugin and through [skills.sh](https://skills.sh), not npm. The package is private so Changesets can manage versions, tags and GitHub Releases without publishing it to a registry.
 
@@ -45,7 +45,7 @@ codex plugin add jralvarenga-skills@jralvarenga
 
 ### Cursor
 
-Add `jralvarenga/skills` as a team marketplace, then open **Customize**, find `jralvarenga-skills` and select **Install**. For a local clone, link it into Cursor's local plugins and reload the window:
+Add `jralvarenga/skills` as a team marketplace, then open **Customize**, find **Rigo's Skills** and select **Install**. For a local clone, link it into Cursor's local plugins and reload the window:
 
 ```bash
 ln -s "$PWD" ~/.cursor/plugins/local/jralvarenga-skills
@@ -100,7 +100,7 @@ bun run changeset
 
 Choose `patch`, `minor` or `major`, write a short summary and commit the generated file inside `.changeset` with the rest of the pull request.
 
-After the pull request is merged into `next`, the release workflow creates or updates a pull request named `chore: version skills` against `next`. That pull request updates `package.json`, `CHANGELOG.md` and the version in every plugin manifest. Once it is approved and merged into `next`, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release. Merge `next` into `main` to publish that release on `main`.
+After the pull request is merged into `next`, the release workflow creates or updates a pull request named `chore: version skills` against `next`. That pull request updates `package.json`, `CHANGELOG.md` and the version in every plugin manifest. Once it is approved and merged into `next`, the workflow creates a `vX.Y.Z` Git tag and a GitHub Release. Merge `next` into `main` to update the default branch with the released changes; this does not publish another release.
 
 The commands used by the workflow are also available locally:
 

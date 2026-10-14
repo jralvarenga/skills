@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent File"
+  short_description: "Write AGENTS.md, CLAUDE.md and DESIGN.md from the codebase"
+  default_prompt: "Use $agent-file to read this codebase and create or update AGENTS.md, CLAUDE.md and DESIGN.md according to my conventions."
