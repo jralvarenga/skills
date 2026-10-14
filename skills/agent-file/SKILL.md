@@ -7,11 +7,11 @@ These are my rules on how to write the agent files of a project. The goal is tha
 
 ## Files
 
-Every project has these three files at the root:
+Every project has `AGENTS.md` and `CLAUDE.md` at the root:
 
 - `AGENTS.md` is the source of truth for the product, architecture, commands, and workflow. Every agent reads it.
 - `CLAUDE.md` only imports `AGENTS.md` with `@AGENTS.md` and adds instructions that are exclusive to Claude Code, if any. Never duplicate content from `AGENTS.md`.
-- `DESIGN.md` is the source of truth for the design system and UI/UX. ALWAYS create it, even when the project has no interface yet.
+- `DESIGN.md` is the source of truth for the design system and UI/UX. Create it when the project has, or will have, a user-facing interface or user-facing output such as CLI messages. Skip it when there is nothing to design, for example a documentation-only or skills collection.
 
 In a monorepo, keep these files at the root and only add a nested `AGENTS.md` inside an app or package when it has its own commands, stack, or rules that don't apply to the rest of the repository. Nested files only describe what is different, never repeat the root.
 
@@ -97,7 +97,7 @@ Follow [design](../design/SKILL.md) and use this order:
 - Components list the base components, where they live, and the variants that exist, so the agent reuses them instead of creating new ones.
 - States cover loading, empty, error, success, disabled, and permission states.
 
-When the project doesn't have a design system yet, write the direction and the decisions taken so far, and list the rest as open questions. When the project has no interface, for example a CLI or a library, still create `DESIGN.md` and describe the user facing output instead, like the tone of messages, errors, and formatting.
+When the project doesn't have a design system yet, write the direction and the decisions taken so far, and list the rest as open questions. When the project has no graphical interface, for example a CLI or a library, still create `DESIGN.md` and describe the user facing output instead, like the tone of messages, errors, and formatting. Do not create `DESIGN.md` when the project has no user-facing interface and no user-facing output to design.
 
 ## Writing style
 
