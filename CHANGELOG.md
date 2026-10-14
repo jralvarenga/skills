@@ -1,5 +1,15 @@
 # jralvarenga-skills
 
+## 2.5.0
+
+### Minor Changes
+
+- 69cf197: Add the `backend` skill for API, database, validation, error handling, infrastructure, and testing rules, with schema-first Zod validation, typed requests and responses, and Docker-first services. Update plugin descriptions so the new skill is discoverable.
+
+### Patch Changes
+
+- 0b2a124: Rename the collection display name to Rigo's Skills in the README and plugin manifests.
+
 ## 2.4.0
 
 ### Minor Changes
