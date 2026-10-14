@@ -1,6 +1,6 @@
-# Skills
+# Rigo's Skills
 
-Personal coding skills shared between Claude Code, Codex, ChatGPT, Cursor, Grok Build and any agent that supports the Agent Skills format.
+Rigo's Skills is a personal collection of coding skills shared between Claude Code, Codex, ChatGPT, Cursor, Grok Build and any agent that supports the Agent Skills format.
 
 This repository is distributed as an agent plugin and through [skills.sh](https://skills.sh), not npm. The package is private so Changesets can manage versions, tags and GitHub Releases without publishing it to a registry.
 
@@ -45,7 +45,7 @@ codex plugin add jralvarenga-skills@jralvarenga
 
 ### Cursor
 
-Add `jralvarenga/skills` as a team marketplace, then open **Customize**, find `jralvarenga-skills` and select **Install**. For a local clone, link it into Cursor's local plugins and reload the window:
+Add `jralvarenga/skills` as a team marketplace, then open **Customize**, find **Rigo's Skills** and select **Install**. For a local clone, link it into Cursor's local plugins and reload the window:
 
 ```bash
 ln -s "$PWD" ~/.cursor/plugins/local/jralvarenga-skills
