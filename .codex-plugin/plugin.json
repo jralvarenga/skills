@@ -22,7 +22,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Rigo Alvarenga Skills",
+    "displayName": "Rigo's Skills",
     "shortDescription": "Personal code guidelines, frontend design, code review, app architecture and backend rules",
     "category": "Coding"
   }

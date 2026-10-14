@@ -8,6 +8,7 @@
   "plugins": [
     {
       "name": "jralvarenga-skills",
+      "displayName": "Rigo's Skills",
       "source": "./",
       "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines, frontend design, code review, app architecture and backend.",
       "category": "engineering",
