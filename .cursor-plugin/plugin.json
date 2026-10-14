@@ -1,7 +1,7 @@
 {
   "name": "jralvarenga-skills",
   "displayName": "Rigo's Skills",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Rigo Alvarenga's agent skills for software engineering: code guidelines, frontend design, code review, app architecture, backend, agent files, and issue management.",
   "author": {
     "name": "Rigo Alvarenga",
