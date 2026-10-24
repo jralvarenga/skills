@@ -56,7 +56,8 @@ Naming files should be in kebab-case, functions and variables should be in camel
 Whenever a test is added, always put it inside a test folder, never next to the source file or loose in the project root.
 Name the test folder after the convention of the language or framework: `__tests__` for JavaScript and TypeScript (Jest, Vitest, React Native), `tests` for Python, Rust and PHP, and `test` for Elixir, Dart and Flutter. If the project or framework already uses a different test folder name, use that one.
 Put the test folder directly inside the folder that contains the source files it verifies, for example components/ui/__tests__/button.test.tsx for components/ui/button.tsx.
-Only place tests next to the source file when the language requires it, like Go `_test.go` files.
+When the test runner only discovers tests in a project-level folder, like `tests` for Rust integration tests or `test` for Dart, Flutter and Elixir, put the tests in that folder and mirror the source structure inside it.
+Only place tests outside a test folder when the language requires it, like Go `_test.go` files next to the source or Rust unit tests in a `#[cfg(test)]` module inside the source file.
 
 ### Writting a component
 

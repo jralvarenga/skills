@@ -51,7 +51,7 @@ Do not pad the review. Zero issues is a valid result.
 - Errors: errors swallowed silently, missing error states in UI, retries without limits.
 - Performance: N+1 queries, work inside loops that can move outside, unbounded lists, missing pagination, extra re-renders.
 - API and contracts: breaking changes to public types, endpoints, or props without a note in the PR.
-- Tests: changed behavior with no test, tests that do not assert anything useful, tests placed outside a test folder.
+- Tests: changed behavior with no test, tests that do not assert anything useful, tests placed outside a test folder when the language does not require colocated tests.
 - Maintainability: duplicated logic, dead code, unclear names, functions doing too many things.
 - Guidelines: anything that breaks the project rules or base guidelines resolved in "Reviewing the code".
 - Intent: the code does what the PR description says, and nothing unrelated slipped in.
