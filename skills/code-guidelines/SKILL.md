@@ -51,6 +51,13 @@ Always try to keep the file name short, take into account if a file is inside a 
 NEVER create and use index.ts files to reexport components, hooks, models, contexts, lib, etc. always use the file name as the name of the export, unless is required by the framework.
 Naming files should be in kebab-case, functions and variables should be in camelCase.
 
+### Tests
+
+Whenever a test is added, always put it inside a test folder, never next to the source file or loose in the project root.
+Name the test folder after the convention of the language or framework: `__tests__` for JavaScript and TypeScript (Jest, Vitest, React Native), `tests` for Python, Rust and PHP, and `test` for Elixir, Dart and Flutter. If the project or framework already uses a different test folder name, use that one.
+Put the test folder directly inside the folder that contains the source files it verifies, for example components/ui/__tests__/button.test.tsx for components/ui/button.tsx.
+Only place tests next to the source file when the language requires it, like Go `_test.go` files.
+
 ### Writting a component
 
 Follow this rules and order of the component

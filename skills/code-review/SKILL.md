@@ -31,7 +31,7 @@ Review every file, go through the checklist one file at a time. For each file:
 - Read the diff for that file.
 - Read the whole file, not only the diff. Many bugs are in how new code interacts with code around it.
 - If the change touches an exported function, type, schema, or API route, search for its callers and check that they still work.
-- Check whether tests were added or updated for the changed behavior.
+- Check whether tests were added or updated for the changed behavior, and that they live inside a test folder named after the language or framework convention, as described in [code-guidelines](../code-guidelines/SKILL.md#tests).
 - Check the file against each item in the checklist below.
 - Mark the file as reviewed. Do not write the summary until every file on the list is marked.
 
@@ -51,7 +51,7 @@ Do not pad the review. Zero issues is a valid result.
 - Errors: errors swallowed silently, missing error states in UI, retries without limits.
 - Performance: N+1 queries, work inside loops that can move outside, unbounded lists, missing pagination, extra re-renders.
 - API and contracts: breaking changes to public types, endpoints, or props without a note in the PR.
-- Tests: changed behavior with no test, tests that do not assert anything useful.
+- Tests: changed behavior with no test, tests that do not assert anything useful, tests placed outside a test folder.
 - Maintainability: duplicated logic, dead code, unclear names, functions doing too many things.
 - Guidelines: anything that breaks the project rules or base guidelines resolved in "Reviewing the code".
 - Intent: the code does what the PR description says, and nothing unrelated slipped in.
