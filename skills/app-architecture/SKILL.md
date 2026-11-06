@@ -54,22 +54,19 @@ In both layouts, keep a single lockfile at the root, pin the runtime and package
 
 ## Branching
 
-Never commit directly to main or next. Both branches are protected, require a pull request, require the CI checks to pass, and block force pushes and deletions.
+Never commit directly to main. It is protected, requires a pull request, requires the CI checks to pass, and blocks force pushes and deletions.
 
-- main: the stable source of truth. It always matches what is running in production.
-- next: the integration branch. Every feature, fix, and chore branch is created from next and merged back into next through a pull request.
+- main: the integration branch and source of truth. Every feature, fix, and chore branch is created from main and merged back into main through a pull request.
 - dev, staging, prod: deployment branches. Each one deploys automatically to its environment and only receives promotions, never direct work.
 
-Promote through pull requests so each environment has a reviewable record of what changed. Hotfixes branch from prod, merge into prod, and are merged back into main and next so no branch loses the fix. Protect dev, staging, and prod with the same rules as main, and require approval for promotions into staging and prod.
+Promote through pull requests so each environment has a reviewable record of what changed. Hotfixes branch from prod, merge into prod, and are merged back into main so no branch loses the fix. Protect dev, staging, and prod with the same rules as main, and require approval for promotions into staging and prod.
 
-Name branches after the issue they resolve, such as 17-add-application-setup, and keep each branch focused on one issue. Squash or rebase feature branches when merging into next to keep its history readable, and use merge commits for promotions so the environment branches share history.
+Name branches after the issue they resolve, such as 17-add-application-setup, and keep each branch focused on one issue. Squash or rebase feature branches when merging into main to keep its history readable, and use merge commits for promotions so the environment branches share history.
 
 This is the promotion flow:
 
 ```
-feature,fix,chore/branch-name -> next -> main -> prod
-
-next -> dev -> staging
+feature,fix,chore/branch-name -> main -> dev -> staging -> prod
 ```
 
 ## Deployment
@@ -82,4 +79,4 @@ Set the default target for each type of app:
 
 Deploy web apps to Vercel or Cloudflare, choosing based on the framework and runtime requirements. Deploy Convex through its own deployment per environment, and React Native apps through EAS with a build profile and update channel for each environment. Always provide a production-ready Dockerfile for server apps so they can run outside the default platform, following the infrastructure rules in [backend](../backend/SKILL.md#infrastructure). Web apps still follow the container rules in [frontend](../frontend/SKILL.md#deployment-and-build).
 
-Configure GitHub Actions to run format check, lint, type check, tests, and a production build on every pull request into next and on every promotion. Deploy only from the deployment branches, and only after the checks pass. Run database migrations as an explicit deployment step before the new version receives traffic, and keep migrations backwards compatible with the version currently running. Document how to roll back each environment, and never bypass failed checks to deploy.
+Configure GitHub Actions to run format check, lint, type check, tests, and a production build on every pull request into main and on every promotion. Deploy only from the deployment branches, and only after the checks pass. Run database migrations as an explicit deployment step before the new version receives traffic, and keep migrations backwards compatible with the version currently running. Document how to roll back each environment, and never bypass failed checks to deploy.
