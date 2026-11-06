@@ -53,7 +53,7 @@ src/
   server.ts
 ```
 
-Keep dependencies flowing in one direction, routers to services to db. Never import a router from a service, and never import a service from the db layer. Introduce queues, caches, background jobs, or extra services only when a concrete requirement justifies them. Write the implementation plan as a sequence of usable slices, each one including its schema, migration, service, procedure, and tests, and explain how its acceptance criteria will be verified. Record consequential decisions, tradeoffs, and risks without adding speculative infrastructure.
+Keep dependencies flowing in one direction, routers to services to db. Never import a router from a service, and never import a service from the db layer. Introduce queues, caches, background jobs, or extra services only when a concrete requirement justifies them. Write the implementation plan as a sequence of usable slices, each one including its schema, migration, service, procedure, and tests placed by the [test folder](../code-guidelines/SKILL.md#tests) rules, and explain how its acceptance criteria will be verified. Record consequential decisions, tradeoffs, and risks without adding speculative infrastructure.
 
 ## Validation and Types
 
@@ -120,6 +120,6 @@ Deploy Docker services to Render unless the user or project specifies otherwise,
 
 ## Testing
 
-Keep tests in a tests folder directly inside the folder containing the source files they verify, following the same structure and naming described in the [frontend testing](../frontend/SKILL.md#testing) rules, for example services/orders/tests/create-order.test.ts.
+Keep tests in a test folder directly inside the folder containing the source files they verify, named and placed by the [test folder](../code-guidelines/SKILL.md#tests) rules and following the same structure and naming described in the [frontend testing](../frontend/SKILL.md#testing) rules. In a TypeScript backend this is `__tests__`, for example services/orders/__tests__/create-order.test.ts.
 
 Test the public contract and the business behavior: valid and invalid inputs against the schemas, authorization rules, error codes, state transitions, and edge cases. Run integration tests for services and queries against a real Postgres database started from the same Docker image used in development instead of mocking the database, and reset it between tests through migrations and seeds. Test procedures and routes through the server handler to verify validation, authentication, status codes, and response shapes. Isolate external services with fakes at the lib layer, keep tests deterministic, and run the relevant tests whenever behavior changes.
