@@ -95,7 +95,38 @@ Reviewed: ...
 Skipped (generated): ...
 
 </details>
+
+<details>
+<summary>Agent fix prompt</summary>
+
+```
+Fix the issues found in PR #<n> (branch `<branch>`) in severity order (P0 → P3). Push one commit (or as few as reasonable). Do not merge.
+
+1. P0 · Short title — `path:line`
+   What's wrong. Expected fix: …
+2. P1 · Short title — `path:line` (also `other:line`)
+   What's wrong. Expected fix: …
+```
+
+</details>
 ````
+
+Include the Agent fix prompt block only when N > 0. When the review found zero issues, omit it.
+
+### Agent fix prompt
+
+When the review found 1 or more issues, the summary includes a copy-ready prompt a coding agent can take to fix every issue. Put it in a collapsible `<details><summary>Agent fix prompt</summary>` wrapping a fenced code block so it is easy to copy.
+
+The prompt lists every issue in the review, not only "Most important", ordered by severity P0 → P3. For each issue include:
+
+- Severity (P0–P3)
+- Short title
+- `path:line` (and other locations when the same problem repeats)
+- What's wrong and the expected fix, or the suggestion block content
+
+Tell the agent the PR number or URL and the branch name. Tell it to fix issues in severity order, push one commit (or as few as reasonable), and not merge.
+
+When the review found zero issues, omit this section. Do not include an empty prompt.
 
 ## Inline comments
 
@@ -119,7 +150,7 @@ await repo.save(order);
 
 ## Posting the review
 
-Show the summary and the list of inline comments to the user first. Post only after they confirm.
+Show the summary (including the agent fix prompt when N > 0) and the list of inline comments to the user first. Post only after they confirm. The agent prompt is part of the summary body, not a separate comment.
 
 Build the payload in a file, then post it as one review:
 
