@@ -1,5 +1,12 @@
 # jralvarenga-skills
 
+## 2.6.0
+
+### Minor Changes
+
+- 4fbef77: Drop the next integration branch from the app-architecture branching rules so feature branches are created from and merged into main, which then promotes to dev, staging and prod.
+- 51fdc73: Require every added test to live inside a test folder named after the language or framework convention, such as `__tests__` for JavaScript and TypeScript or `tests` for Python and Rust, and check test placement during code review.
+
 ## 2.5.1
 
 ### Patch Changes
